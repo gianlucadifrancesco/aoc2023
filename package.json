@@ -1,0 +1,21 @@
+{
+  "name": "aoc2023",
+  "version": "1.0.0",
+  "description": "Sounder's server side.",
+  "author": "Gianluca Di Francesco",
+  "license": "MIT",
+  "main": "src/server.js",
+  "scripts": {
+    "01": "cd 01 && node index.js"
+  },
+  "private": true,
+  "engines": {
+    "node": "~21.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0"
+  }
+}
