@@ -18,7 +18,7 @@ const regexp = new RegExp(`(\\d|${Object.keys(wordToNum).join('|')})`, 'gi');
 let total = 0;
 
 input.forEach((line) => {
-  let digits = [];
+  const digits = [];
   let matches = [];
 
   while ((matches = regexp.exec(line))) {
@@ -28,10 +28,8 @@ input.forEach((line) => {
   }
   regexp.lastIndex = 0;
 
-  const [firstDigit, lastDigit] = [
-    getDigit(digits[0]),
-    getDigit(digits[digits.length - 1]),
-  ];
+  const firstDigit = getDigit(digits[0]);
+  const lastDigit = getDigit(digits[digits.length - 1]);
 
   total += firstDigit * 10 + lastDigit;
 });
