@@ -1,28 +1,39 @@
 const fs = require('fs');
 const input = fs.readFileSync('./input.txt').toString().split('\n');
 
-let sum = 0;
+const wordToNum = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+};
+const getDigit = (str) => +str || +wordToNum[str];
+const regexp = new RegExp(`(\\d|${Object.keys(wordToNum).join('|')})`, 'gi');
 
-input.forEach((el) => {
-  let toSum = 0;
+let total = 0;
 
-  for (let i = 0; i < el.length; i += 1) {
-    const currChar = +el[i];
-    if (!Number.isNaN(currChar)) {
-      toSum += currChar * 10;
-      break;
-    }
+input.forEach((line) => {
+  let digits = [];
+  let matches = [];
+
+  while ((matches = regexp.exec(line))) {
+    const [match] = matches;
+    regexp.lastIndex -= match.length - 1;
+    digits.push(match);
   }
+  regexp.lastIndex = 0;
 
-  for (i = el.length - 1; i >= 0; i -= 1) {
-    const currChar = +el[i];
-    if (!Number.isNaN(currChar)) {
-      toSum += currChar;
-      break;
-    }
-  }
+  const [firstDigit, lastDigit] = [
+    getDigit(digits[0]),
+    getDigit(digits[digits.length - 1]),
+  ];
 
-  sum += toSum;
+  total += firstDigit * 10 + lastDigit;
 });
 
-console.log('total: ', sum);
+console.log('total: ', total);
